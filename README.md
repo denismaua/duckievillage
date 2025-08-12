@@ -43,12 +43,16 @@ Install Duckieotwns's dependencies (this might take a while):
 
 `cd duckietown && pip3 install -e .`
 
+Fork the `duckievillage-assignments` repository on github:
+
+> https://github.com/denismaua/duckievillage-assignments
+
 
 Now clone the assignments:
 
 ```bash
 cd ..
-git clone git@github.com:denismaua/duckievillage-assignments.git assignments
+git clone git@github.com:<YOUR_USERNAME>/duckievillage-assignments.git assignments
 ```
 
 ---
