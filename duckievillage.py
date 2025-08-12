@@ -919,8 +919,8 @@ def create_env(raw_motor_input: bool = True, noisy: bool = False, **kwargs):
         self.final_fbo_human,
         self.img_array_human,
         top_down = True,
-        segment=segment,
-        callback = (lambda: self.mailbox.render()) if self.mailbox is not None else None,
+        segment=segment #,
+        # callback = (lambda: self.mailbox.render()) if self.mailbox is not None else None,
       )
 
     def front(self, segment = False):
@@ -931,8 +931,8 @@ def create_env(raw_motor_input: bool = True, noisy: bool = False, **kwargs):
         self.final_fbo_human,
         self.img_array_human,
         top_down = False,
-        segment=segment,
-        callback = (lambda: self.mailbox.render()) if self.mailbox is not None else None,
+        segment=segment #,
+        # callback = (lambda: self.mailbox.render()) if self.mailbox is not None else None,
       )
 
     def render(self, mode: str = "human", close: bool = False, segment: bool = False, text: str = ""):
