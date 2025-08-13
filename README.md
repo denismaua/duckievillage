@@ -34,7 +34,7 @@ virtualenv duckievillage
 
 To activate this environment, do
 
-`source ~/.venv/duckievillage/bin/activate`
+`source ~/duckievillage/bin/activate`
 
 **You will need to activate this environment every time you use this package**. 
 
