@@ -34,7 +34,9 @@ virtualenv duckievillage
 
 To activate this environment, do
 
-`source ~/duckievillage/bin/activate`
+```bash
+source ~/duckievillage/bin/activate
+```
 
 **You will need to activate this environment every time you use this package**. 
 
@@ -48,7 +50,9 @@ git clone https://github.com/denismaua/gym-duckietown.git duckietown
 
 Install Duckieotwns's dependencies (this might take a while):
 
-`cd duckietown && pip3 install -e .`
+```bash
+cd duckietown && pip3 install -e .
+```
 
 Fork the `duckievillage-assignments` repository on github:
 
@@ -66,7 +70,7 @@ git clone git@github.com:<YOUR_USERNAME>/duckievillage-assignments.git assignmen
 
 ## Testing
 
-Cd to the folder where this file is locate and activate you environment (if not already acrivated):
+Cd to the folder where this file is located and activate you environment (if not already acrivated):
 
 ```bash
 cd ~/duckievillage
@@ -80,26 +84,19 @@ python3 assignments/manual/manual.py
 ```
 
 This should open the simulator graphical interface and run the code for the first assignment.
+If you haven't changed the file `assignments/manuam/manual.py` the roboy should not move. 
 See [assignments/manual/README.md] for instructions on how to modify the file `manual.py` to make your own manually controlled simulated duckiebot!
 
 If you get an error, trying restarting your computer. If the error persists see the [FAQ](#troubleshooting) section below.
 
 ## Uninstallation
 
-To uninstall, simply run `uninstall.sh` with the same shell you used for installing Duckievillage
-and follow instructions.
+To uninstall, simply remove the folder `duckievillage`:
 
----
-
-## Updating Duckievillage
-
-Before running Duckievillage, make sure you have the latest version by running `update.sh`:
-
+```bash
+cd
+rm -Rf duckievillage
 ```
-zsh update.sh
-```
-
-This will update Duckievillage, Duckietown and assignments.
 
 ---
 
