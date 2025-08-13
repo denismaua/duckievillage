@@ -102,37 +102,43 @@ rm -Rf duckievillage
 
 ## Troubleshooting
 
-1. I get an error when trying to `git clone` the `duckievillage` or `duckietown` repo: the directory already exists. This probably due to a previously installed/cloned version. To remove it, do:
+1. I get an error when trying to `git clone` the `duckievillage` or `duckietown` repo: the directory already exists.
 
+> This probably due to a previously installed/cloned version. To remove it, do:
 > `cd`
 > `rm -Rf duckievillage`
 
 Then follow the instructions for [installation](#Installation).
 
-2. Something goes wrong involving gym-duckietown.
+2. The `duckievillage` module was not found.
+
+> You might need to add the duckievillage folder to Python's path:
+> `echo "export PYTHONPATH=\"\${PYTHONPATH}:$(pwd)/duckievillage\"" >> ~/.bashrc`
+> Resource your rcfile with `source ~/.bashrc` and reactivate the environment `source ~/duckievillage/bin/activate`
+
+3. Something goes wrong involving gym-duckietown.
 
 > You might have a different version of gym-duckietown installed or Python is simply not finding the proper path.
 > Try adding this installation to the PATH:
 > `echo "export PYTHONPATH=\"\${PYTHONPATH}:$(pwd)/duckievillage/duckietown/src\"" >> ~/.bashrc`
 > Resource your rcfile with `source ~/.bashrc` and reactivate the environment `source ~/duckievillage/bin/activate`
 
-2. I get a permission denied when trying to clone from within a WSL shell!
+4. I get a permission denied when trying to clone from within a WSL shell!
 
 > You should clone from a WSL partition, and not from your Windows NTFS. Do `cd ~` and retry.
 
-4. `ModuleNotFoundError: No module named 'duckievillage'`
+5. `ModuleNotFoundError: No module named 'duckievillage'`
 
 > You have to `cd` to the Duckievillage root directory (i.e. the directory you cloned). If the
 > error persists, try either closing your shell session and opening another one (don't forget to
 > `cd` to the Duckievillage root directory and activate your environment), or sourcing
 > your rcfile.
 
-5. `ModuleNotFoundError: No module named 'zuper_commons'`
+6. `ModuleNotFoundError: No module named 'zuper_commons'`
 
 > You have to activate the Duckietown environment.
 
-
-6. `pyglet.gl.ContextException: Could not create GL context`
+7. `pyglet.gl.ContextException: Could not create GL context`
 
 > This might either be a VM issue or a Pyglet version issue. VMs are not supported in
 > Duckievillage. If it's Pyglet, you may want to either try updating the Anaconda environment with
