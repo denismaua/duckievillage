@@ -59,7 +59,7 @@ Fork the `duckievillage-assignments` repository on github:
 > https://github.com/denismaua/duckievillage-assignments
 
 
-Now clone the assignments:
+Now clone the assignments (notice that you have substitute `<YOUR_USERNAME>` below in the addres with your github username):
 
 ```bash
 cd ..
