@@ -17,6 +17,14 @@ course; and to be used as course walkthrough.
 
 ## Installation
 
+We will assume you have provided your credentials to github (`ssh-keygen`, etc).
+
+Clone this repository into your home folder:
+```bash
+cd
+git clone git@github.com:denismaua/duckievillage.git
+```
+
 It is **highly recommended** that you use a python environment, for example:
 
 ```bash
@@ -28,8 +36,7 @@ To activate this environment, do
 
 `source ~/.venv/duckievillage/bin/activate`
 
-
-You will need to activate this environment every time you use this package. 
+**You will need to activate this environment every time you use this package**. 
 
 Clone (the patched version of) `gym-duckietown` inside `duckievillage`'s folder:
 
@@ -98,7 +105,14 @@ This will update Duckievillage, Duckietown and assignments.
 
 ## Troubleshooting
 
-1. Something goes wrong involving gym-duckietown
+1. I get an error when trying to `git clone` the `duckievillage` or `duckietown` repo: the directory already exists. This probably due to a previously installed/cloned version. To remove it, do:
+
+> `cd`
+> `rm -Rf duckievillage`
+
+Then follow the instructions for [installation](#Installation).
+
+2. Something goes wrong involving gym-duckietown.
 
 > You might have a different version of gym-duckietown installed or Python is simply not finding the proper path.
 > Try adding this installation to the PATH:
