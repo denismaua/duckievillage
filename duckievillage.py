@@ -811,8 +811,24 @@ class Mileage:
   def update(self, dt: float): self._mileage += dt
   def mileage(self): return self._mileage
 
+class DuckietownNoisyEnv(gym_duckietown.simulator.Simulator):
+
+    def __init__(self, mu_l: float = 0.0, std_l: float = 0.001,
+                 mu_r: float = 0.0, std_r: float = 0.0001, **kwargs):
+        gym_duckietown.simulator.Simulator.__init__(self, **kwargs)
+
+        self.mu_l, self.std_l = mu_l, std_l
+        self.mu_r, self.std_r = mu_r, std_r
+
+    def step(self, action):
+        if not math.isclose(action[0], 0, abs_tol = 1e-5):
+            action[0] += random.gauss(self.mu_l, self.std_l)
+        if not math.isclose(action[1], 0, abs_tol = 1e-5):
+            action[1] += random.gauss(self.mu_r, self.std_r)
+        return gym_duckietown.simulator.Simulator.step(self, action)
+
 def create_env(raw_motor_input: bool = True, noisy: bool = False, **kwargs):
-  class DuckievillageEnv(gym_duckietown.envs.DuckietownNoisyEnv if noisy else
+  class DuckievillageEnv(DuckietownNoisyEnv if noisy else
                          gym_duckietown.simulator.Simulator if raw_motor_input else gym_duckietown.envs.DuckietownEnv):
     top_down = False
 
