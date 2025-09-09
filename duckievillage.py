@@ -6,6 +6,8 @@
 #
 # See https://github.com/duckietown/gym-duckietown for more information on Duckietown Gym.
 
+from typing import Any, cast, Dict, List, NewType, Optional, Sequence, Tuple, Union
+
 import logging
 import math
 import random
@@ -1196,8 +1198,47 @@ def create_env(raw_motor_input: bool = True, noisy: bool = False, **kwargs):
       u, v = s/np.linalg.norm(s), t/np.linalg.norm(t)
       return np.cross(u, v)/(np.linalg.norm(u, ord=1)*np.linalg.norm(v, ord=1))
 
+    def closest_curve_point2(
+        self, pos: np.array, angle: float, delta: float = 0.0
+    ) -> Tuple[Optional[np.array], Optional[np.array]]:
+        """
+        Get the closest point on the curve to a given point
+        Also returns the tangent at that point.
+
+        Returns None, None if not in a lane.
+        """
+
+        i, j = self.get_grid_coords(pos)
+        tile = self._get_tile(i, j)
+
+        if tile is None or not tile["drivable"]:
+            return None, None, None
+
+        # Find curve with largest dotproduct with heading
+        curves = self._get_tile(i, j)["curves"]
+        curve_headings = curves[:, -1, :] - curves[:, 0, :]
+        curve_headings = curve_headings / np.linalg.norm(curve_headings).reshape(1, -1)
+        dir_vec = gym_duckietown.simulator.get_dir_vec(angle)
+
+        dot_prods = np.dot(curve_headings, dir_vec)
+
+        # Closest curve = one with largest dotprod
+        cps = curves[np.argmax(dot_prods)]
+
+        # Find closest point and tangent to this curve
+
+        t = gym_duckietown.graphics.bezier_closest(cps, pos) + delta
+        point = gym_duckietown.graphics.bezier_point(cps, t)
+        tangent = gym_duckietown.graphics.bezier_tangent(cps, t)
+
+        p_0 = gym_duckietown.graphics.bezier_point(cps, gym_duckietown.graphics.bezier_closest(cps, pos))
+        return point, tangent, p_0
+
+
     def lf_target(self):
-      _, ct, c0 = self.closest_curve_point(self.cur_pos, self.cur_angle, delta = 0.2)
+      _, ct, c0 = self.closest_curve_point2(self.cur_pos, self.cur_angle, delta = 0.2)
+      if ct is None or c0 is None:
+        return np.NaN, np.NaN
       u, v = np.delete(c0, 1), np.delete(ct, 1)
       p = u-self.get_position()
       t = math.asin(self.sine_target(v))
